@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "water",
+  "version": "${version}",
+  "name": "BETTER CHAT",
+  "description": "Lets You To See The Chat Way Cleaner",
+  "authors": [
+    "Claude, ChatGPT, AntiGravity"
+  ],
+  "contact": {},
+  "license": "CC0-1.0",
+  "icon": "assets/water/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.water.WaterClient"
+    ]
+  },
+  "mixins": [
+    "water.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

@@ -1,0 +1,57 @@
+========================================
+  WaterClient v5 - วิธี Build (สำคัญ)
+========================================
+
+อย่าทำตาม Copilot ที่บอกให้ใช้ Java 25 !!!
+
+ใช้ Java 21 เท่านั้น
+ใช้ Loom 1.14.10 เท่านั้น (อยู่ใน build.gradle แล้ว)
+
+----------------------------------------
+ขั้นตอนใน Codespaces / VS Code
+----------------------------------------
+
+1. ลบทุกไฟล์ใน workspace เดิมออกให้หมด
+   (อย่าเอา template มาผสม)
+
+2. แตกไฟล์ WaterClient-v5-fixed.zip
+   ให้เห็นโฟลเดอร์ WaterClient-src
+
+3. เปิดโฟลเดอร์ WaterClient-src เป็น root ของ workspace
+   (ต้องเห็น build.gradle และ src/ อยู่ระดับเดียวกัน)
+
+4. ใน Terminal พิมพ์ทีละคำสั่ง:
+
+   java -version
+   (ต้องขึ้น version 21 ถ้าเป็น 25 ให้สลับก่อน)
+
+   export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
+   # หรือถ้ามี sdkman:
+   # sdk use java 21.0.12-ms
+
+   rm -rf .gradle build
+   ./gradlew build --no-daemon
+
+5. ถ้าสำเร็จ จะมีไฟล์:
+   build/libs/WaterClient-1.0.0.jar
+
+----------------------------------------
+ตรวจว่า config ถูก
+----------------------------------------
+
+เปิดไฟล์ build.gradle ต้องมีบรรทัดนี้:
+  id 'fabric-loom' version '1.14.10'
+
+ถ้าเห็น 1.18 หรือ 1.18-SNAPSHOT = ผิด ไฟล์ถูกทับด้วย template
+
+เปิดไฟล์ gradle.properties ต้องมี:
+  minecraft_version=1.21.11
+  yarn_mappings=1.21.11+build.6
+
+----------------------------------------
+ห้ามทำ
+----------------------------------------
+- ห้ามใช้ Java 25
+- ห้ามเปลี่ยน Loom เป็น 1.18
+- ห้ามผสมกับ template-mod
+- ห้ามเอา claude client.zip มาวางทับ
